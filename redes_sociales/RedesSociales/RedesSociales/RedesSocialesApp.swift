@@ -9,11 +9,12 @@ import SwiftUI
 
 @main
 struct RedesSocialesApp: App {
-    @State var controlador_global = ContorladorGlobal()
+    @State var controlador = ControladorAplicacion()
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-        }.environment(controlador_global)
+            GeneralPublicaciones()
+                .environment(controlador)
+        }
     }
 }

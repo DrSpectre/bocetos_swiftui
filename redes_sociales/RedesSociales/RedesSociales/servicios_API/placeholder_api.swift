@@ -8,15 +8,15 @@ import SwiftUI
 
 
 class PlaceHolderAPI: Codable {
-    let url_de_publiaciones = "https://jsonplaceholder.typicode.com"
+    let url_de_servicio = "https://jsonplaceholder.typicode.com" // URl de la ubicacion o fuente de todos los demas recursos
     
-    func descargar_publicaciones<T: Codable>() async -> T? {
+    func descargar_publicaciones() async  -> [Publicacion]? {
         do {
-            guard let url = URL(string: "\(url_de_publiaciones)/posts") else { throw ErroresDeRed.badUrl }
+            guard let url = URL(string: "\(url_de_servicio)/posts") else { throw ErroresDeRed.badUrl }
             let (datos, respuesta) = try await URLSession.shared.data(from: url)
             guard let respuesta = respuesta as? HTTPURLResponse else { throw ErroresDeRed.badResponse }
             guard respuesta.statusCode >= 200 && respuesta.statusCode < 300  else { throw ErroresDeRed.badStatus }
-            guard let respuesta_decodificada = try? JSONDecoder().decode(T.self, from: datos) else { throw ErroresDeRed.fallaAlConvertirLaRespuesta }
+            guard let respuesta_decodificada = try? JSONDecoder().decode([Publicacion].self, from: datos) else { throw ErroresDeRed.fallaAlConvertirLaRespuesta }
             
             return respuesta_decodificada
         }
@@ -38,7 +38,7 @@ class PlaceHolderAPI: Codable {
             print("Como llegaste aqui?")
         }
         catch {
-            print("Algo exageradamente malo paso")
+            print("Algo terriblemente mal que no se que es, paso. No deberias de ver esto")
         }
         
         return nil
