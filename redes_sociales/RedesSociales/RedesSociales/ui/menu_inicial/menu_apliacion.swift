@@ -22,7 +22,7 @@ struct MenuNavegacion: View {
                 .tabItem{Label("Es esta pantalla \n otra parte", systemImage: "circle")}
                 .badge(controlador.publicaciones.count)
             
-            Text("Hola dos")
+            PantallaPersonajes()
                 .tabItem{
                     Label{
                         VStack{
