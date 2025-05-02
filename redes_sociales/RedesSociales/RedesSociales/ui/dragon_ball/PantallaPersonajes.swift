@@ -16,22 +16,41 @@ struct PantallaPersonajes: View {
             if(controlador.pagina_resultados != nil){
                 ScrollView{
                     LazyVStack{
-                        ForEach(controlador.pagina_resultados!.items){ personaje in
-                            NavigationLink {
-                                Text("Hola mundo \(controlador.personaje?.originPlanet?.name)")
-                            } label: {
-                                Text("El personaje es \(personaje.name)")
-                                AsyncImage(url: URL(string: personaje.image))
+                        ForEach(controlador.pagina_resultados!.items){ persoanje in
+                            NavigationLink{
+                                PantallaPersonaje()
+                            } label : {
+                                PrevistaMonoChino(mono_chino: persoanje)
                             }.simultaneousGesture(TapGesture().onEnded({
-                                controlador.descargar_informacion_personaje(id: personaje.id)
+                               //  Aqui ejecutamos codigo magico
                             }))
                         }
                     }
                 }
             }
+        }.onAppear {
+            Task {
+                await controlador.descargar_monos_chinos()
+            }
         }
     }
 }
+
+/*
+ 
+ LazyVStack{
+     ForEach(controlador.pagina_resultados!.items){ personaje in
+         NavigationLink {
+             Text("Hola mundo \(controlador.personaje?.originPlanet?.name)")
+         } label: {
+             Text("El personaje es \(personaje.name)")
+             AsyncImage(url: URL(string: personaje.image))
+         }.simultaneousGesture(TapGesture().onEnded({
+             controlador.descargar_informacion_personaje(id: personaje.id)
+         }))
+     }
+ }
+ */
 
 #Preview {
     PantallaPersonajes()

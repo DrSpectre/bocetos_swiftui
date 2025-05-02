@@ -20,12 +20,14 @@ public class ControladorAplicacion{
     var pagina_resultados: PaginaResultado? = nil
     var personaje: MonoChino? = nil
     
+    var pagina_resultados_planetas: PaginaResultadoPlaneta? = nil
+    
     
     init(){
         Task.detached(priority: .high){
             await self.descargar_publicaciones()
             
-            await self.descargar_monos_chinos()
+            //await self.descargar_monos_chinos()
         }
     }
     

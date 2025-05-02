@@ -21,9 +21,22 @@ struct Enlaces: Codable{
     let last: String
 }
 
-struct PaginaResultado: Codable { //, Identifiable {
-    //var id: Int = self.meta.currentPage
+struct PaginaResultado: Codable {
     let items: [MonoChino]
     let meta: Meta
     let links: Enlaces
 }
+
+protocol Item: Codable, Identifiable{
+    var id: Int { get set }
+    var name: String { get set }
+}
+
+struct PaginaResultadoPlaneta: Codable { //, Identifiable {
+    //var id: Int = self.meta.currentPage
+    let items: [Planeta]
+    let meta: Meta
+    let links: Enlaces
+}
+
+
